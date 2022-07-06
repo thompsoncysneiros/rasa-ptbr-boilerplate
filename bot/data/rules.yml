@@ -30,20 +30,20 @@ rules:
   - action: utter_submit_exemplo_forms
   - action: utter_slots_exemplo_forms
 
-# Consulta form
-- rule: Ativa formulário de consulta
+# Cisam form
+- rule: Ativa formulário Cisam
   steps:
-  - intent: consulta_form
-  - action: utter_consulta_form
-  - action: consulta_form
-  - active_loop: consulta_form
+  - intent: cumprimentar
+  - action: utter_cumprimentar
+  - action: cisam_form
+  - active_loop: cisam_form
 
-- rule: Envia formulário de consulta
+- rule: Envia formulário Cisam
   condition:
-  - active_loop: consulta_form
+  - active_loop: cisam_form
   steps:
-  - action: consulta_form
+  - action: cisam_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - action: utter_consulta_slots
+
