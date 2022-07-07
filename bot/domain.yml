@@ -103,6 +103,91 @@ slots:
     type: text
     initial_value: null
     influence_conversation: true
+  cenario_um_menu:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_logado_nome:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_prontuario:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  cenario_dois_menu:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_nome_paciente:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_nome_social:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_telefone:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_data_nasc:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_sexo:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_cpf:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_nome_mae:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_email:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_end_cep:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_end_rua:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_end_numero:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_end_complemento:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_end_bairro:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_end_cidade:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_numero_sus:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_certidao_nascimento:
+    type: text
+    initial_value: null
+    influence_conversation: true
+  user_certidao_casamento:
+    type: text
+    initial_value: null
+    influence_conversation: true
+
 
 forms:
   exemplo_forms:
@@ -120,12 +205,211 @@ forms:
       tipo_consulta:
       - type: from_text
         intent: null
+  cisam_form:
+    required_slots:
+      cenario_um_menu:
+      - type: from_text
+        intent: null
+      user_logado_nome:
+      - type: from_text
+        intent: null
+      user_prontuario:
+      - type: from_text
+        intent: null
+      cenario_dois_menu:
+      - type: from_text
+        intent: null
+      user_nome_paciente:
+      - type: from_text
+        intent: null
+      user_nome_social:
+      - type: from_text
+        intent: null
+      user_telefone:
+      - type: from_text
+        intent: null
+      user_data_nasc:
+      - type: from_text
+        intent: null
+      user_sexo:
+      - type: from_text
+        intent: null
+      user_cpf:
+      - type: from_text
+        intent: null
+      user_nome_mae:
+      - type: from_text
+        intent: null
+      user_email:
+      - type: from_text
+        intent: null
+      user_end_cep:
+      - type: from_text
+        intent: null
+      user_end_rua:
+      - type: from_text
+        intent: null
+      user_end_numero:
+      - type: from_text
+        intent: null
+      user_end_complemento:
+      - type: from_text
+        intent: null
+      user_end_bairro:
+      - type: from_text
+        intent: null
+      user_end_cidade:
+      - type: from_text
+        intent: null
+      user_numero_sus:
+      - type: from_text
+        intent: null
+      user_certidao_nascimento:
+      - type: from_text
+        intent: null
+      user_certidao_casamento:
+      - type: from_text
+        intent: null
 
 actions:
 - action_exemplo
 - validate_consulta_form
+- validate_cisam_form
 
 responses:
+  utter_ask_cenario_um_menu:
+  - text: |
+      Você já possui prontuário no Cisam?
+
+      Se sim, digite 1.
+      Se não, digite 2.
+
+  utter_cenario_um_menu_resp_um:
+  - text: |
+      Entendi, você já possui um prontuário.
+
+  utter_cenario_um_menu_resp_dois:
+  - text: |
+      Entendi, você não possui prontuário! 
+      Para efetuar o seu cadastro e solicitar a TeleConsulta acesse o link: https://bit.ly/TeleConsultaCisam
+
+  utter_cenario_um_menu_resp_errado:
+  - text: |
+      Desculpe, informe o valor numérico 1 ou 2!
+
+  utter_ask_user_logado_nome:
+  - text: |
+      Que bom! Nos informe o seu primeiro nome por favor.
+      Exemplo: Maria
+
+  utter_ask_user_prontuario:
+  - text: |
+      Agora me informe o número do seu prontuario
+
+  utter_ask_cenario_dois_menu:
+  - text: |
+      Perfeito, Srª {user_logado_nome}!
+      Agora, nos informe qual a opção que deseja
+        
+      1: Saber mais sobre o que é NUTES.
+      2: Saber mais sobre a Teleconsulta.
+      3: Saber mais sobre o Planejamento Reprodutivo.
+      4: Agendar Teleconsulta para Planejamento Reprodutivo.
+
+  utter_cenario_dois_menu_resp_um:
+  - text: |
+      1: O que é o NUTES? Acesse o link https://www.youtube.com/watch?v=-a4P2d7rP7s
+
+  utter_cenario_dois_menu_resp_dois:
+  - text: |
+      2: Informações sobre a Teleconsulta. (VIDEO)  
+
+  utter_cenario_dois_menu_resp_tres:
+  - text: |
+      3: Planejamento Reprodutivo. (VÍDEO)  
+
+  utter_cenario_dois_menu_resp_quatro:
+  - text: |
+      4: Agendar Teleconsulta.  
+
+  utter_ask_user_nome_paciente:
+  - text: |
+      Ok, me informe o nome completo do(a) paciente.
+
+  utter_ask_user_nome_social:
+  - text: |
+      Nome social do(a) paciente (no caso de usar um nome diferente do seus documentos)
+      (Caso não possua, digite não)        
+
+  utter_ask_user_telefone:
+  - text: |
+      Ótimo! Agora me informe o número do seu telefone ou celular;
+      Por exemplo: (81)3182-7758
+
+  utter_ask_user_data_nasc:
+  - text: |
+      Agora me informe a sua data de nascimento.
+      Exemplo: 20/05/1980 
+
+  utter_ask_user_sexo:
+  - text: |
+      Entendi, agora me informe o seu sexo.
+      Exemplo: F
+
+  utter_ask_user_cpf:
+  - text: |
+      Ok, agora me informe o seu CPF.
+      Por exemplo: 123.456.789-10
+
+  utter_ask_user_nome_mae:
+  - text: |
+      Me informe o nome completo da mãe do(a) paciente.
+
+  utter_ask_user_email:
+  - text: |
+      Certo. E qual o seu e-mail?
+      Por exemplo: telessaude.cisam@upe.br
+
+  utter_ask_user_end_cep:
+  - text: |
+      Agora preciso que me informe o CEP.
+      Por exemplo: 51380-450
+
+  utter_ask_user_end_rua:
+  - text: |
+      Ok, entendi, agora preciso que me informe o nome da sua rua.
+
+  utter_ask_user_end_numero:
+  - text: |
+      Entendi, agora preciso que vodê me informe o número da residência.
+
+  utter_ask_user_end_complemento:
+  - text: |
+      Certo, agora me informe o complemento do seu endereço.
+      (Caso não possua, digite não)
+
+  utter_ask_user_end_bairro:
+  - text: |
+      Preciso que me informe o bairro onde você mora.
+
+  utter_ask_user_end_cidade:
+  - text: |
+      Ok, me informe a cidade seguido do Estado.
+      Por exemplo: Recife-PE
+
+  utter_ask_user_numero_sus:
+  - text: |
+      E qual o número do seu cartão do SUS?
+      Por exemplo: 9256875625159856
+  utter_ask_user_certidao_nascimento:
+  - text: |
+      Entendi, agora me informe a sua certidão de nascimento. 
+      (Caso não possua, digite não) 
+
+  utter_ask_user_certidao_casamento:
+  - text: |
+      Muito bom, agpra me diz qual o npumero da sua certidão de casamento. 
+      (Caso não possua, digite não)
   utter_tipo_consulta_errado:
   - text: |
       Desculpe, informe um valor numérico entre 1 e 3!
@@ -165,16 +449,13 @@ responses:
       Obrigada! É sempre bom dar e receber elogios :P
   utter_cumprimentar:
   - text: |
-      Olá! Meu nome é Clau! Serei sua assistente virtual do CISAM.
-
-      As teleconsultas são consultas realizadas em formato online, ou seja, não presenciais.
-      São realizadas através de chamada de vídeo entre o profissional de saúde (médico, psicólogo, enfermeiro e outros) e a/o paciente.
-      Para dar andamento ao agendamento da Tele Consulta, você precisa acessar o link: https://bit.ly/TeleConsultraCisam
+      Olá! Sou a Clau a atendente virtual do Cisam.
+      Será um prazer ajudá-la(o)
   utter_despedir:
   - text: |
-      Foi um prazer te conhecer!
-      Sempre que tiver alguma dúvida, volte aqui!
-      O CISAM agradece o seu contato! Até logo!
+      Foi um prazer conversar com você!
+      Agora aguarde confirmação da sua teleconsulta por e-mail.
+      Logo logo entraremos em contato.
   - text: |
       Foi um prazer te ajudar!
       Sempre que precisar, volte aqui!

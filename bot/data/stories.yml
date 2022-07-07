@@ -1,15 +1,15 @@
 version: "2.0"
 stories:
-- story: cumprimentar
-  steps:
-  - intent: cumprimentar
-  - action: utter_cumprimentar
-- story: Oi Tudo Bem
-  steps:
-  - intent: cumprimentar
-  - action: utter_cumprimentar
-  - intent: tudo_bem
-  - action: utter_tudo_bem
+#- story: cumprimentar
+#  steps:
+#  - intent: cumprimentar
+#  - action: utter_cumprimentar
+#- story: Oi Tudo Bem
+#  steps:
+#  - intent: cumprimentar
+#  - action: utter_cumprimentar
+#  - intent: tudo_bem
+#  - action: utter_tudo_bem
 - story: Despedir
   steps:
   - intent: despedir
