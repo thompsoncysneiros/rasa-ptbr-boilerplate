@@ -85,7 +85,7 @@ api:
 		bot \
 		make api ENDPOINTS=$(ENDPOINTS) CREDENTIALS=$(CREDENTIALS)
 
-actions:
+actions:	
 	docker-compose run \
 		--rm \
 		--service-ports \
@@ -139,6 +139,15 @@ train:
 	docker-compose run \
 		--rm bot \
 		make train
+
+alltrain:
+	make clean 
+	make train
+	sudo service docker start
+	docker-compose run \
+		--rm bot \
+		make alltrain
+	
 
 ############################## NOTEBOOKS ##########################
 

@@ -309,7 +309,7 @@ responses:
   utter_ask_cenario_dois_menu:
   - text: |
       Perfeito, Srª {user_logado_nome}!
-      Agora, nos informe qual a opção que deseja
+      Agora, nos informe qual a opção que deseja.
         
       1: Saber mais sobre o que é NUTES.
       2: Saber mais sobre a Teleconsulta.
@@ -318,19 +318,27 @@ responses:
 
   utter_cenario_dois_menu_resp_um:
   - text: |
-      1: O que é o NUTES? Acesse o link https://www.youtube.com/watch?v=-a4P2d7rP7s
+        Caso deseje voltar para o diáglogo anterior, digite: #.
+
+        1: O que é o NUTES? Acesse o link https://www.youtube.com/watch?v=-a4P2d7rP7s
 
   utter_cenario_dois_menu_resp_dois:
   - text: |
-      2: Informações sobre a Teleconsulta. (VIDEO)  
+        Caso deseje voltar para o diáglogo anterior, digite: #.
+        
+        2: Informações sobre a Teleconsulta. (VIDEO)  
 
   utter_cenario_dois_menu_resp_tres:
   - text: |
-      3: Planejamento Reprodutivo. (VÍDEO)  
+        Caso deseje voltar para o diáglogo anterior, digite: #.
+
+        3: Planejamento Reprodutivo. (VÍDEO)  
 
   utter_cenario_dois_menu_resp_quatro:
   - text: |
-      4: Agendar Teleconsulta.  
+        Caso deseje voltar para o diáglogo anterior, digite: #.
+
+        4: Agendar Teleconsulta.  
 
   utter_ask_user_nome_paciente:
   - text: |
@@ -413,6 +421,10 @@ responses:
   utter_tipo_consulta_errado:
   - text: |
       Desculpe, informe um valor numérico entre 1 e 3!
+  
+  utter_voltar_resp_errada:
+  - text:
+      Digite "#" para voltar ou "sair" para encerrar.
 
   utter_consulta_form:
   - text: |
@@ -450,7 +462,9 @@ responses:
   utter_cumprimentar:
   - text: |
       Olá! Sou a Clau a atendente virtual do Cisam.
-      Será um prazer ajudá-la(o)
+      Será um prazer ajudá-la(o). Para prosseguir você deverá digitar as opções apresentadas na conversa.
+      
+      Caso deseje voltar para o diáglogo anterior, digite: #.
   utter_despedir:
   - text: |
       Foi um prazer conversar com você!

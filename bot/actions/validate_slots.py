@@ -71,8 +71,11 @@ class ValidateCisamForm(FormValidationAction):
         """Validate user_logado_nome"""
 
         data_user_logado_nome = slot_value
-        return {"user_logado_nome": data_user_logado_nome}
-
+        if data_user_logado_nome == '#':
+            return {"cenario_um_menu": None, "user_logado_nome": None}
+        else:
+            return {"user_logado_nome": data_user_logado_nome}
+        
     def validate_user_prontuario(
             self,
             slot_value: Any,
@@ -83,7 +86,10 @@ class ValidateCisamForm(FormValidationAction):
         """Validate user_prontuario"""
 
         data_user_prontuario = slot_value
-        return {"user_prontuario": data_user_prontuario}
+        if data_user_prontuario == '#':
+            return {"user_logado_nome": None, "user_prontuario": None}
+        else:
+            return {"user_prontuario": data_user_prontuario}
 
     def validate_cenario_dois_menu(
             self,
@@ -97,16 +103,18 @@ class ValidateCisamForm(FormValidationAction):
         data_cenario_dois_menu = slot_value
         if data_cenario_dois_menu == '1':
             dispatcher.utter_message(response="utter_cenario_dois_menu_resp_um")
-            return {"requested_slot": None}
+            return {"cenario_dois_menu": data_cenario_dois_menu, "user_nome_paciente": None}
         elif data_cenario_dois_menu == '2':
             dispatcher.utter_message(response="utter_cenario_dois_menu_resp_dois")
-            return {"requested_slot": None}
+            return {"cenario_dois_menu": data_cenario_dois_menu, "user_nome_paciente": None}
         elif data_cenario_dois_menu == '3':
             dispatcher.utter_message(response="utter_cenario_dois_menu_resp_tres")
-            return {"requested_slot": None}
+            return {"cenario_dois_menu": data_cenario_dois_menu, "user_nome_paciente": None}
         elif data_cenario_dois_menu == '4':
             dispatcher.utter_message(response="utter_cenario_dois_menu_resp_quatro")
-            return {"cenario_dois_menu": data_cenario_dois_menu}
+            return {"cenario_dois_menu": data_cenario_dois_menu, "user_nome_paciente": None}
+        elif data_cenario_dois_menu == '#':
+            return {"cenario_dois_menu": None, "user_nome_paciente": None, "user_prontuario": None}
         else:
             dispatcher.utter_message(response="utter_cenario_dois_menu_resp_errado")
             return {"cenario_dois_menu": None}
@@ -120,7 +128,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_nome_paciente"""
 
-        return {"user_nome_paciente": slot_value}
+        if slot_value == '#':
+            return {"cenario_dois_menu": None, "user_nome_paciente": None}
+        else:
+            return {"user_nome_paciente": slot_value}
 
     def validate_user_nome_social(
             self,
@@ -130,8 +141,10 @@ class ValidateCisamForm(FormValidationAction):
             domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate user_nome_social"""
-
-        return {"user_nome_social": slot_value}
+        if slot_value == '#':
+            return {"user_nome_paciente": None, "user_nome_social": None}
+        else:
+            return {"user_nome_social": slot_value}
 
     def validate_user_telefone(
             self,
@@ -142,7 +155,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_telefone"""
 
-        return {"user_telefone": slot_value}
+        if slot_value == '#':
+            return {"user_nome_social": None}
+        else:
+            return {"user_telefone": slot_value}
 
     def validate_user_data_nasc(
             self,
@@ -153,7 +169,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_data_nasc"""
 
-        return {"user_data_nasc": slot_value}
+        if slot_value == '#':
+            return {"user_telefone": None}
+        else:
+            return {"user_data_nasc": slot_value}
 
     def validate_user_sexo(
             self,
@@ -164,7 +183,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_sexo"""
 
-        return {"user_sexo": slot_value}
+        if slot_value == '#':
+            return {"user_data_nasc": None}
+        else:
+            return {"user_sexo": slot_value}
 
     def validate_user_cpf(
             self,
@@ -175,7 +197,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_cpf"""
 
-        return {"user_cpf": slot_value}
+        if slot_value == '#':
+            return {"user_sexo": None}
+        else:
+            return {"user_cpf": slot_value}
 
     def validate_user_nome_mae(
             self,
@@ -186,7 +211,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_nome_mae"""
 
-        return {"user_nome_mae": slot_value}
+        if slot_value == '#':
+            return {"user_cpf": None}
+        else:
+            return {"user_nome_mae": slot_value}
 
     def validate_user_email(
             self,
@@ -197,7 +225,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_email"""
 
-        return {"user_email": slot_value}
+        if slot_value == '#':
+            return {"user_nome_mae": None}
+        else:
+            return {"user_email": slot_value}
 
     def validate_user_end_cep(
             self,
@@ -208,7 +239,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_end_cep"""
 
-        return {"user_end_cep": slot_value}
+        if slot_value == '#':
+            return {"user_email": None}
+        else:
+            return {"user_end_cep": slot_value}
 
     def validate_user_end_rua(
             self,
@@ -219,7 +253,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_end_rua"""
 
-        return {"user_end_rua": slot_value}
+        if slot_value == '#':
+            return {"user_end_cep": None}
+        else:
+            return {"user_end_rua": slot_value}
 
     def validate_user_end_numero(
             self,
@@ -230,7 +267,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_end_numero"""
 
-        return {"user_end_numero": slot_value}
+        if slot_value == '#':
+            return {"user_end_rua": None}
+        else:
+            return {"user_end_numero": slot_value}
 
     def validate_user_end_complemento(
             self,
@@ -241,7 +281,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_end_complemento"""
 
-        return {"user_end_complemento": slot_value}
+        if slot_value == '#':
+            return {"user_end_numero": None}
+        else:
+            return {"user_end_complemento": slot_value}
 
     def validate_user_end_bairro(
             self,
@@ -252,7 +295,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_end_bairro"""
 
-        return {"user_end_bairro": slot_value}
+        if slot_value == '#':
+            return {"user_end_complemento": None}
+        else:
+            return {"user_end_bairro": slot_value}
 
     def validate_user_end_cidade(
             self,
@@ -263,7 +309,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_end_cidade"""
 
-        return {"user_end_cidade": slot_value}
+        if slot_value == '#':
+            return {"user_end_bairro": None}
+        else:
+            return {"user_end_cidade": slot_value}
 
     def validate_user_numero_sus(
             self,
@@ -274,7 +323,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_numero_sus"""
 
-        return {"user_numero_sus": slot_value}
+        if slot_value == '#':
+            return {"user_end_cidade": None}
+        else:
+            return {"user_numero_sus": slot_value}
 
     def validate_user_certidao_nascimento(
             self,
@@ -285,7 +337,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_certidao_nascimento"""
 
-        return {"user_certidao_nascimento": slot_value}
+        if slot_value == '#':
+            return {"user_numero_sus": None}
+        else:
+            return {"user_certidao_nascimento": slot_value}
 
     def validate_user_certidao_casamento(
             self,
@@ -296,7 +351,10 @@ class ValidateCisamForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate user_certidao_casamento"""
 
-        dispatcher.utter_message(response="utter_despedir")
-        return {"user_certidao_casamento": slot_value}
+        if slot_value == '#':
+            return {"user_certidao_nascimento": None}
+        else:
+            dispatcher.utter_message(response="utter_despedir")
+            return {"user_certidao_casamento": slot_value}
 
 
