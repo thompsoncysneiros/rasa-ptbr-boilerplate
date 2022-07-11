@@ -103,6 +103,10 @@ slots:
     type: text
     initial_value: null
     influence_conversation: true
+  user_lgpd:
+    type: text
+    initial_value: null
+    influence_conversation: true
   cenario_um_menu:
     type: text
     initial_value: null
@@ -207,6 +211,9 @@ forms:
         intent: null
   cisam_form:
     required_slots:
+      user_lgpd:
+      - type: from_text
+        intent: null
       cenario_um_menu:
       - type: from_text
         intent: null
@@ -277,6 +284,25 @@ actions:
 - validate_cisam_form
 
 responses:
+  utter_ask_user_lgpd:
+  - text: |
+      Antes de iniciarmos, preciso saber se você concorda em fornecer seus dados pessoais ao NUTES CISAM de acordo com a Lei Geral de Proteção de dados (LGPD)  
+      Se sim, digite 1. 
+      Se não, digite 2.
+
+  utter_user_lgpd_sim:
+  - text: |
+      Ok, você concorda em usarmos os seus dados conforme a Lei Geral de Proteção de dados LGPD, agora podemos prosseguir.
+
+  utter_user_lgpd_nao:
+  - text: |
+      Você não concorda em usarmos os seus dados conforme LGPD, infelizmente não poderei seguir adiante.
+      Mas caso você mude de ideia estarei à sua disposição.
+
+  utter_user_lgpd_errado:
+  - text: |
+      Desculpe, informe o valor numérico 1 ou 2!
+
   utter_ask_cenario_um_menu:
   - text: |
       Você já possui prontuário no Cisam?

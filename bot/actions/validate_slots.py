@@ -41,6 +41,26 @@ class ValidateCisamForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_cisam_form"
 
+    def validate_user_lgpd(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate user_lgpd"""
+
+        data_user_lgpd = slot_value
+        if data_user_lgpd == '1':
+            dispatcher.utter_message(response="utter_user_lgpd_sim")
+            return {"user_lgpd": data_user_lgpd}
+        elif data_user_lgpd == '2':
+            dispatcher.utter_message(response="utter_user_lgpd_nao")
+            return {"user_lgpd": None, "requested_slot": None}
+        else:
+            dispatcher.utter_message(response="utter_user_lgpd_errado")
+            return {"user_lgpd": None}
+
     def validate_cenario_um_menu(
             self,
             slot_value: Any,
