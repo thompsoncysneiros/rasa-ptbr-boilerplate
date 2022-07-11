@@ -1,10 +1,11 @@
 from pkgutil import extend_path
 from typing import Text, List, Any, Dict
+from urllib import response
 
 from rasa_sdk import Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
-
+import re
 
 class ValidateConsultaForm(FormValidationAction):
     def name(self) -> Text:
@@ -41,17 +42,24 @@ class ValidateCisamForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_cisam_form"
     
-    def set_slots_none(
-            self,
-            slot_value: Any,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        """Zerar os Slots Cenário 2"""
-        slot_name = tracker.get_slot("data_cenario_dois_menu")
+    def check(email):
+      regex = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+      if re.search(regex, email):
+        return "v"
+      else:
+        return "i"
+    
+    # def set_slots_none(
+    #         self,
+    #         slot_value: Any,
+    #         dispatcher: CollectingDispatcher,
+    #         tracker: Tracker,
+    #         domain: DomainDict,
+    # ) -> Dict[Text, Any]:
+    #     """Zerar os Slots Cenário 2"""
+    #     slot_name = tracker.get_slot("data_cenario_dois_menu")
 
-        return {"cenario_dois_menu": slot_name, "user_nome_paciente": None, "user_nome_social": None, "user_telefone": None, "user_data_nasc": None,"user_sexo": None, "user_cpf": None, "user_nome_mae": None, "user_email": None, "user_end_cep": None, "user_end_rua": None, "user_end_numero": None, "user_end_complemento": None, "user_end_bairro": None, "user_end_cidade": None, "user_numero_sus": None, "user_certidao_nascimento": None}
+    #     return {"cenario_dois_menu": slot_name, "user_nome_paciente": None, "user_nome_social": None, "user_telefone": None, "user_data_nasc": None,"user_sexo": None, "user_cpf": None, "user_nome_mae": None, "user_email": None, "user_end_cep": None, "user_end_rua": None, "user_end_numero": None, "user_end_complemento": None, "user_end_bairro": None, "user_end_cidade": None, "user_numero_sus": None, "user_certidao_nascimento": None}
     
     def validate_user_lgpd(
             self,
@@ -166,10 +174,10 @@ class ValidateCisamForm(FormValidationAction):
             return {"user_nome_paciente": None, "cenario_dois_menu": None}
         # Prosseguir para user_nome_paciente
         elif comparar == '4':
-            if len(slot_value) <= 3 and not slot_value.isdigit():
-                dispatcher.utter_message(text="Nome curto.")
-                return {"user_nome_paciente": None}
             # validador
+            if len(slot_value) <= 3 or slot_value.isdigit():
+                dispatcher.utter_message(response="utter_user_nome_paciente_invalido")
+                return {"user_nome_paciente": None}
             else:
                 return {"user_nome_paciente": slot_value}
         else:
@@ -257,6 +265,7 @@ class ValidateCisamForm(FormValidationAction):
         if slot_value == '#':
             return {"user_cpf": None}
         else:
+            dispatcher.utter_message(response="utter_user_email")
             return {"user_nome_mae": slot_value}
 
     def validate_user_email(
@@ -267,11 +276,15 @@ class ValidateCisamForm(FormValidationAction):
             domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate user_email"""
-
+        
         if slot_value == '#':
             return {"user_nome_mae": None}
         else:
-            return {"user_email": slot_value}
+            if ValidateCisamForm.check(slot_value) == 'v':
+                return {"user_email": slot_value}
+            else:
+                dispatcher.utter_message(response="utter_user_email_invalido")
+                return {"user_email":  None}
 
     def validate_user_end_cep(
             self,

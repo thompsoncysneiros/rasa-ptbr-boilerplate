@@ -368,10 +368,12 @@ responses:
   utter_cenario_dois_menu_resp_errado:
   - text:
         Desculpe, informe um valor numérico entre 1 e 4.
-  utter_ask_user_nome_paciente:
+  utter_user_nome_paciente:
   - text: |
       Ok, me informe o nome completo do(a) paciente.
-
+  utter_user_nome_paciente_invalido:
+  - text:
+      Desculpe, não entendi! Acho que o nome que você está digitando possui um erro. Vamos tentar denovo? Por exemplo, Maria da Silva.
   utter_ask_user_nome_social:
   - text: |
       Nome social do(a) paciente (no caso de usar um nome diferente do seus documentos)
@@ -401,10 +403,13 @@ responses:
   - text: |
       Me informe o nome completo da mãe do(a) paciente.
 
-  utter_ask_user_email:
+  utter_user_email:
   - text: |
       Certo. E qual o seu e-mail?
       Por exemplo: telessaude.cisam@upe.br
+  utter_user_email_invalido:
+  - text: |
+      Por favor insira um e-mail válido.
 
   utter_ask_user_end_cep:
   - text: |
