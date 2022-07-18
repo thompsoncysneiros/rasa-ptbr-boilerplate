@@ -179,6 +179,10 @@ slots:
     type: text
     initial_value: null
     influence_conversation: true
+  user_end_uf:
+    type: text
+    initial_value: null
+    influence_conversation: true
   user_numero_sus:
     type: text
     initial_value: null
@@ -191,7 +195,6 @@ slots:
     type: text
     initial_value: null
     influence_conversation: true
-
 
 forms:
   exemplo_forms:
@@ -268,6 +271,9 @@ forms:
       user_end_cidade:
       - type: from_text
         intent: null
+      user_end_uf:
+      - type: from_text
+        intent: null
       user_numero_sus:
       - type: from_text
         intent: null
@@ -287,7 +293,7 @@ responses:
   utter_ask_user_lgpd:
   - text: |
       Antes de iniciarmos, preciso saber se você concorda em fornecer seus dados pessoais ao NUTES CISAM de acordo com a Lei Geral de Proteção de dados (LGPD)  
-      Se sim, digite 1. 
+      Se sim, digite 1.
       Se não, digite 2.
 
   utter_user_lgpd_sim:
@@ -303,10 +309,10 @@ responses:
   - text: |
       Desculpe, informe o valor numérico 1 ou 2!
 
-  utter_ask_cenario_um_menu:
+  utter_cenario_um_menu:
   - text: |
       Você já possui prontuário no Cisam?
-
+         
       Se sim, digite 1.
       Se não, digite 2.
 
@@ -316,27 +322,35 @@ responses:
 
   utter_cenario_um_menu_resp_dois:
   - text: |
-      Entendi, você não possui prontuário! 
+      Entendi, você não possui prontuário!
       Para efetuar o seu cadastro e solicitar a TeleConsulta acesse o link: https://bit.ly/TeleConsultaCisam
 
   utter_cenario_um_menu_resp_errado:
   - text: |
       Desculpe, informe o valor numérico 1 ou 2!
 
-  utter_ask_user_logado_nome:
+  utter_user_logado_nome:
   - text: |
       Que bom! Nos informe o seu primeiro nome por favor.
       Exemplo: Maria
 
-  utter_ask_user_prontuario:
+  utter_user_logado_nome_invalido:
+  - text: |
+      Digite um nome válido.
+
+  utter_user_prontuario:
   - text: |
       Agora me informe o número do seu prontuario
 
-  utter_ask_cenario_dois_menu:
+  utter_user_prontuario_invalido:
+  - text: |
+      O prontuário digitado não é válido, vamos tentar novamente?
+
+  utter_cenario_dois_menu:
   - text: |
       Perfeito, Srª {user_logado_nome}!
       Agora, nos informe qual a opção que deseja.
-        
+          
       1: Saber mais sobre o que é NUTES.
       2: Saber mais sobre a Teleconsulta.
       3: Saber mais sobre o Planejamento Reprodutivo.
@@ -344,113 +358,201 @@ responses:
 
   utter_cenario_dois_menu_resp_um:
   - text: |
-        Caso deseje voltar para o diálogo anterior, digite: #.
+      Caso deseje voltar para o diálogo anterior, digite: #.
 
-        1: O que é o NUTES? Acesse o link https://www.youtube.com/watch?v=-a4P2d7rP7s
+      1: O que é o NUTES? Acesse o link https://www.youtube.com/watch?v=-a4P2d7rP7s
 
   utter_cenario_dois_menu_resp_dois:
   - text: |
-        Caso deseje voltar para o diálogo anterior, digite: #.
-        
-        2: Informações sobre a Teleconsulta. (VIDEO)  
+      Caso deseje voltar para o diálogo anterior, digite: #.
+
+      2: Informações sobre a Teleconsulta. (VIDEO)  
 
   utter_cenario_dois_menu_resp_tres:
   - text: |
-        Caso deseje voltar para o diálogo anterior, digite: #.
+      Caso deseje voltar para o diálogo anterior, digite: #.
 
-        3: Planejamento Reprodutivo. (VÍDEO)  
+      3: Planejamento Reprodutivo. (VÍDEO)  
 
   utter_cenario_dois_menu_resp_quatro:
   - text: |
-        Caso deseje voltar para o diálogo anterior, digite: #.
+      Caso deseje voltar para o diálogo anterior, digite: #.
 
-        4: Agendar Teleconsulta.  
+      4: Agendar Teleconsulta.
+
   utter_cenario_dois_menu_resp_errado:
   - text:
-        Desculpe, informe um valor numérico entre 1 e 4.
+      Desculpe, informe um valor numérico entre 1 e 4.
+
+  utter_cenario_dois_resp_errada_voltar:
+  - text: |
+      Caso deseje voltar para o diálogo anterior, digite: #.
+
   utter_user_nome_paciente:
   - text: |
       Ok, me informe o nome completo do(a) paciente.
+
   utter_user_nome_paciente_invalido:
-  - text:
-      Desculpe, não entendi! Acho que o nome que você está digitando possui um erro. Vamos tentar denovo? Por exemplo, Maria da Silva.
-  utter_ask_user_nome_social:
   - text: |
-      Nome social do(a) paciente (no caso de usar um nome diferente do seus documentos)
-      (Caso não possua, digite não)        
+      Desculpe, não entendi! Acho que o nome que você está digitando possui um erro. Vamos tentar de novo? Por exemplo, Maria da Silva.
 
-  utter_ask_user_telefone:
+  utter_user_nome_social:
   - text: |
-      Ótimo! Agora me informe o número do seu telefone ou celular;
-      Por exemplo: (81)3182-7758
+      Nome social do(a) paciente (no caso de usar um nome diferente do seus documentos).
+      (Caso não possua, digite não)
 
-  utter_ask_user_data_nasc:
+  utter_user_nome_social_invalido:
+  - text: |
+      Digite o nome social maior do que dois caracteres e que não contenha números.
+      (Caso não possua, digite não)
+
+  utter_user_telefone:
+  - text: |
+      Ótimo! Agora me informe o número do seu telefone ou celular.
+      Por exemplo: 81-3182-7758
+
+  utter_user_telefone_invalido:
+  - text: |
+      Ops! Número de telefone inválido, tente novamente! Por exemplo: 81-3182-7758     
+
+  utter_user_data_nasc:
   - text: |
       Agora me informe a sua data de nascimento.
-      Exemplo: 20/05/1980 
+      Exemplo: 20/05/1980
 
-  utter_ask_user_sexo:
+  utter_user_data_nasc_invalido:
+  - text: |
+      Acho que você digitou algo errado :(, tente novamente.
+      Exemplo: 20/05/1980
+
+  utter_user_sexo:
   - text: |
       Entendi, agora me informe o seu sexo.
-      Exemplo: F
+      Exemplo: F para feminino ou M para masculino.
 
-  utter_ask_user_cpf:
+  utter_user_sexo_invalido:
+  - text: |
+      Dado incorreto, favor inserir conforme exemplo: F para feminino ou M para masculino.      
+
+  utter_user_cpf:
   - text: |
       Ok, agora me informe o seu CPF.
       Por exemplo: 123.456.789-10
 
-  utter_ask_user_nome_mae:
+  utter_user_cpf_invalido:
+  - text: |
+      CPF digitado inválido, tente novamente.
+      Por exemplo: 123.456.789-10
+
+  utter_user_nome_mae:
   - text: |
       Me informe o nome completo da mãe do(a) paciente.
+
+  utter_user_nome_mae_invalido:
+  - text: |
+      Desculpe, não entendi! Acho que o nome que você está digitando possui um erro. Vamos tentar de novo? Por exemplo, Maria da Silva.
 
   utter_user_email:
   - text: |
       Certo. E qual o seu e-mail?
       Por exemplo: telessaude.cisam@upe.br
+
   utter_user_email_invalido:
   - text: |
       Por favor insira um e-mail válido.
 
-  utter_ask_user_end_cep:
+  utter_user_end_cep:
   - text: |
       Agora preciso que me informe o CEP.
       Por exemplo: 51380-450
 
-  utter_ask_user_end_rua:
+  utter_user_end_cep_invalido:
+  - text: |
+      CEP inválido, lembre-se que o o CEP é composto por 7 dígitos.
+      Por exemplo: 51380-450
+
+  utter_user_end_rua:
   - text: |
       Ok, entendi, agora preciso que me informe o nome da sua rua.
 
-  utter_ask_user_end_numero:
+  utter_user_end_rua_invalido:
+  - text: |
+      Desculpe, não entendi! Acho que o nome que você está digitando um nome de rua errado. Vamos tentar de novo? 
+
+  utter_user_end_numero:
   - text: |
       Entendi, agora preciso que vodê me informe o número da residência.
 
-  utter_ask_user_end_complemento:
+  utter_user_end_numero_invalido:
+  - text: |
+      Não entendi, podemos tentar novamente? Digite um número de residência válido.  
+
+  utter_user_end_complemento:
   - text: |
       Certo, agora me informe o complemento do seu endereço.
       (Caso não possua, digite não)
 
-  utter_ask_user_end_bairro:
+  utter_user_end_complemento_invalido:
+  - text: |
+      Complemento inválido, vamos tentar novamente.
+      (Caso não possua, digite não)
+
+  utter_user_end_bairro:
   - text: |
       Preciso que me informe o bairro onde você mora.
 
-  utter_ask_user_end_cidade:
+  utter_user_end_bairro_invalido:
   - text: |
-      Ok, me informe a cidade seguido do Estado.
-      Por exemplo: Recife-PE
+      Bairro digitado inválido, vamos tentar de novo.
 
-  utter_ask_user_numero_sus:
+  utter_user_end_cidade:
   - text: |
-      E qual o número do seu cartão do SUS?
-      Por exemplo: 9256875625159856
-  utter_ask_user_certidao_nascimento:
-  - text: |
-      Entendi, agora me informe a sua certidão de nascimento. 
-      (Caso não possua, digite não) 
+      Ok, me informe a cidade onde você mora.
+      Por exemplo: Recife
 
-  utter_ask_user_certidao_casamento:
+  utter_user_end_cidade_invalido:
   - text: |
-      Muito bom, agpra me diz qual o npumero da sua certidão de casamento. 
+      Cidade não é válida, vamos tentar novamente?
+
+  utter_user_end_uf:
+  - text: |
+      Agora preciso saber o Estado onde você mora.
+      Por exemplo: PE
+
+  utter_user_end_uf_invalido:
+  - text: |
+      UF inválido, vamos tentar novamente!
+      Por exemplo: PE
+
+  utter_user_numero_sus:
+  - text: |
+      E qual o número do seu cartão do SUS? Lembre-se, são 15 dígitos.
+      Por exemplo: 925687562515985
+
+  utter_user_numero_sus_invalido:
+  - text: |
+      Número informado inválido! Lembre-se, o número SUS é formado por 15 números.
+
+  utter_user_certidao_nascimento:
+  - text: |
+      Entendi, agora me informe a sua certidão de nascimento.
       (Caso não possua, digite não)
+
+  utter_user_certidao_nascimento_invalido:
+  - text: |
+      Não entendi, vamos tentar novamente? Digite a sua certidão de nascimento.
+      (Caso não possua, digite não)
+
+  utter_user_certidao_casamento:
+  - text: |
+      Muito bom, agpra me diz qual o número da sua certidão de casamento.
+      (Caso não possua, digite não)
+
+  utter_user_certidao_casamento_invalido:
+  - text: |
+      Não entendi, vamos tentar novamente? Digite a sua certidão de casamento.
+      (Caso não possua, digite não)
+
   utter_tipo_consulta_errado:
   - text: |
       Desculpe, informe um valor numérico entre 1 e 3!
