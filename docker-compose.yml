@@ -14,21 +14,21 @@ services:
       - 5005:5005
       - 5006:5006
       - 5007:5007
-      - 5008:5008
-      - 5009:5009
     depends_on:
       - actions
 
   # ================================= Actions =================================
   # Rasa middleware used to connect with external APIs.
   actions:
-    image: arthurtemporim/boilerplate:latest
+    build:
+      context: .
+      dockerfile: ./docker/actions.Dockerfile
     restart: unless-stopped
     ports:
       - 5055:5055
     volumes:
       - ./bot:/bot
-    command: sh -c "make actions"
+    command: sh -c "python -m rasa_sdk -p 5055 --actions actions"
 
   # ============================ Webchat Page  =================================
   # A container to run webchat html page
