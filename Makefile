@@ -3,7 +3,7 @@ user := $(shell whoami)
 
 ENDPOINTS = endpoints/docker-endpoints.yml
 CREDENTIALS = credentials/credentials.yml
-
+CREDENTIALS_TELEGRAM = credentials/telegram-credentials.yml 
 clean:
 	docker-compose down
 	cd bot/ && make clean
@@ -28,11 +28,6 @@ first-run:
 build:
 	make build-bot
 
-build-requirements:
-	docker build . \
-		--no-cache \
-		-f docker/requirements.Dockerfile \
-		-t arthurtemporim/boilerplate
 
 build-bot:
 	docker-compose build \
@@ -114,11 +109,10 @@ webchat:
 
 telegram:
 	docker-compose run \
-		-d \
 		--rm \
 		--service-ports \
 		bot-telegram \
-		make telegram ENDPOINTS=$(ENDPOINTS) CREDENTIALS=$(CREDENTIALS)
+		make telegram ENDPOINTS=$(ENDPOINTS) CREDENTIALS=$(CREDENTIALS_TELEGRAM)
 
 rocket:
 	docker-compose up \

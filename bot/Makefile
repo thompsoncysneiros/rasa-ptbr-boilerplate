@@ -107,7 +107,7 @@ telegram:
 		$(LOG_LEVEL) \
 		$(RASA_ENDPOINTS) $(ENDPOINTS) \
 		$(RASA_CREDENTIALS)	credentials/telegram-credentials.yml \
-		--port 5008 \
+		--port 5005 \
 
 rocket:
 	python /modules/rocketchat/bot_config.py
