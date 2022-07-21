@@ -16,13 +16,6 @@ install:
 	pip install --upgrade pip 						&& \
 	pip install -r requirements.txt
 
-# RASA X
-install-x:
-	pip install -r x-requirements.txt
-
-x:
-	rasa x --no-prompt
-
 # RASALIT
 install-rasalit:
 	pip install $(PIP_FLAGS) -r rasalit-requirements.txt
@@ -66,24 +59,19 @@ visualize:
 		rasa visualize \
 			--out ./graph.html
 
-tensor_diet:
+tensor:
 		tensorboard \
-			--logdir .tensorboard_diet
-
-tensor_ted:
-		tensorboard \
-			--logdir .tensorboard_ted
+			-- bind_all \
+			--logdir .
 
 # CHAT
-api:
+telegram:
 	rasa run \
 		-m models/ \
 		$(LOG_LEVEL) \
 		$(RASA_ENDPOINTS) $(ENDPOINTS) \
-		$(RASA_CREDENTIALS)	$(CREDENTIALS) \
-		--enable-api \
-		--cors '*' \
-		--port 5005
+		$(RASA_CREDENTIALS)	credentials/telegram-credentials.yml \
+		--port 5005 \
 
 shell:
 	rasa shell \
@@ -100,25 +88,6 @@ webchat:
 		$(RASA_CREDENTIALS)	$(CREDENTIALS) \
 		--cors '*' \
 		--port 5007 
-
-telegram:
-	rasa run \
-		-m models/ \
-		$(LOG_LEVEL) \
-		$(RASA_ENDPOINTS) $(ENDPOINTS) \
-		$(RASA_CREDENTIALS)	credentials/telegram-credentials.yml \
-		--port 5005 \
-
-rocket:
-	python /modules/rocketchat/bot_config.py
-	rasa run \
-		-m models/ \
-		$(LOG_LEVEL) \
-		$(RASA_ENDPOINTS) $(ENDPOINTS) \
-		$(RASA_CREDENTIALS)	credentials/rocketchat-credentials.yml \
-		--cors '*' \
-		--port 5009 \
-		--enable-api
 
 
 # ACTIONS
