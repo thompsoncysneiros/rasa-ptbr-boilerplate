@@ -12,6 +12,8 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
+from . import utils
+
 
 class ActionExemplo(Action):
 
@@ -23,6 +25,7 @@ class ActionExemplo(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         dispatcher.utter_message(text="Esta mensagem esta sendo enviada do RASA SDK!!!")
+        dispatcher.utter_message(text=utils.GLOBAL_VAR)
 
         return []
 
