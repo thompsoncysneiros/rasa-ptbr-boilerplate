@@ -1,6 +1,7 @@
 FROM rasa/rasa-sdk:2.8.8
 
 USER root
+RUN pip install mysql-connector-python
 RUN apt update && apt install make
 
 WORKDIR /bot
