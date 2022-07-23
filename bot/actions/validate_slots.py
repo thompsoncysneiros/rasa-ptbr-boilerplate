@@ -1,23 +1,23 @@
-from pkgutil import extend_path
+import re
+import mysql.connector
+from datetime import datetime
 from typing import Text, List, Any, Dict
-from urllib import response
 
-from rasa_sdk import Tracker, FormValidationAction
+from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
-import re
-from datetime import datetime
+
 
 class ValidateConsultaForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_consulta_form"
 
     def validate_tipo_consulta(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate tipo_consulta"""
 
@@ -32,10 +32,10 @@ class ValidateConsultaForm(FormValidationAction):
         dispatcher.utter_message(response="utter_tipo_consulta_errado")
         return {"tipo_consulta": None}
 
-        #if slot_value.lower() in self.cuisine_db():
+        # if slot_value.lower() in self.cuisine_db():
         #    # validation succeeded, set the value of the "cuisine" slot to value
         #    return {"cuisine": slot_value}
-        #else:
+        # else:
         #    # validation failed, set this slot to None so that the
         #    # user will be asked for the slot again
         #    return {"cuisine": None}
@@ -490,7 +490,8 @@ class ValidateCisamForm(FormValidationAction):
         if slot_value == '#':
             return {"user_certidao_nascimento": None, "user_numero_sus": None}
         else:
-            if (len(slot_value) >= 3 and slot_value.isdigit()) or slot_value.upper() == 'NÃO' or slot_value.upper() == 'NAO':
+            if (
+                    len(slot_value) >= 3 and slot_value.isdigit()) or slot_value.upper() == 'NÃO' or slot_value.upper() == 'NAO':
                 dispatcher.utter_message(response="utter_user_certidao_casamento")
                 return {"user_certidao_nascimento": slot_value}
             else:
@@ -509,12 +510,14 @@ class ValidateCisamForm(FormValidationAction):
         if slot_value == '#':
             return {"user_certidao_casamento": None, "user_certidao_nascimento": None}
         else:
-            if (len(slot_value) >= 3 and slot_value.isdigit()) or slot_value.upper() == 'NÃO' or slot_value.upper() == 'NAO':
+            if (
+                    len(slot_value) >= 3 and slot_value.isdigit()) or slot_value.upper() == 'NÃO' or slot_value.upper() == 'NAO':
                 dispatcher.utter_message(response="utter_despedir")
                 return {"user_certidao_casamento": slot_value}
             else:
                 dispatcher.utter_message(response="utter_user_certidao_casamento_invalido")
                 return {"user_certidao_casamento": None}
+
 
 class UtilsForm:
 
@@ -543,7 +546,6 @@ class UtilsForm:
                 pass
         return "invalido"
 
-
     def check_cpf(cpf):
         regex = '^(\d{3})\.?(\d{3})\.?(\d{3})\-?(\d{2})$'
         if re.search(regex, cpf):
@@ -559,7 +561,9 @@ class UtilsForm:
             return "invalido"
 
     def check_uf(uf):
-        estados = ("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO")
+        estados = (
+            "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI",
+            "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO")
         for estado in estados:
             if estado == uf:
                 return "valido"
@@ -568,5 +572,53 @@ class UtilsForm:
         return "invalido"
 
 
+def DataUpdate(a, b, c, d, e, f, g, h, i, j, la, m, n, o, p, q, r, s, t, u):
+    mydb = mysql.connector.connect(
+        host="host.docker.internal",
+        user="root",
+        password="root",
+        database="Cisam"
+    )
+
+    mycursor = mydb.cursor()
+
+    sql = 'INSERT INTO UserCisam (user_lgpd, user_prontuario, user_nome_paciente, user_nome_social, user_telefone, user_data_nasc, ' \
+          'user_sexo, user_cpf, user_nome_mae, user_email, user_end_cep, ' \
+          'user_end_rua, user_end_numero, user_end_complemento, user_end_bairro, user_end_cidade, user_end_uf, ' \
+          'user_numero_sus, user_certidao_nascimento, user_certidao_casamento) VALUES ("{0}","{1}","{2}","{3}","{4}","{5}",' \
+          '"{6}","{7}","{8}","{9}","{10}","{11}","{12}","{13}","{14}","{15}","{16}","{17}","{18}","{19}");'.format(a, b, c, d, e, f, g, h, i, j, la, m, n, o, p, q, r, s, t, u)
+    mycursor.execute(sql)
+    mydb.commit()
 
 
+class ActionSubmit(Action):
+
+    def name(self) -> Text:
+        return "action_submit"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        a = tracker.get_slot("user_lgpd")
+        b = tracker.get_slot("user_prontuario")
+        c = tracker.get_slot("user_nome_paciente")
+        d = tracker.get_slot("user_nome_social")
+        e = tracker.get_slot("user_telefone")
+        f = tracker.get_slot("user_data_nasc")
+        g = tracker.get_slot("user_sexo")
+        h = tracker.get_slot("user_cpf")
+        i = tracker.get_slot("user_nome_mae")
+        j = tracker.get_slot("user_email")
+        la = tracker.get_slot("user_end_cep")
+        m = tracker.get_slot("user_end_rua")
+        n = tracker.get_slot("user_end_numero")
+        o = tracker.get_slot("user_end_complemento")
+        p = tracker.get_slot("user_end_bairro")
+        q = tracker.get_slot("user_end_cidade")
+        r = tracker.get_slot("user_end_uf")
+        s = tracker.get_slot("user_numero_sus")
+        t = tracker.get_slot("user_certidao_nascimento")
+        u = tracker.get_slot("user_certidao_casamento")
+
+        DataUpdate(a, b, c, d, e, f, g, h, i, j, la, m, n, o, p, q, r, s, t, u)
+        return []
