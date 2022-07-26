@@ -119,82 +119,82 @@ slots:
     type: text
     initial_value: null
     influence_conversation: true
-  cenario_dois_menu:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_nome_paciente:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_nome_social:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_telefone:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_data_nasc:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_sexo:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_cpf:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_nome_mae:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_email:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_end_cep:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_end_rua:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_end_numero:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_end_complemento:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_end_bairro:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_end_cidade:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_end_uf:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_numero_sus:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_certidao_nascimento:
-    type: text
-    initial_value: null
-    influence_conversation: true
-  user_certidao_casamento:
-    type: text
-    initial_value: null
-    influence_conversation: true
+#  cenario_dois_menu:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_nome_paciente:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_nome_social:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_telefone:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_data_nasc:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_sexo:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_cpf:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_nome_mae:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_email:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_end_cep:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_end_rua:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_end_numero:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_end_complemento:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_end_bairro:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_end_cidade:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_end_uf:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_numero_sus:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_certidao_nascimento:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
+#  user_certidao_casamento:
+#    type: text
+#    initial_value: null
+#    influence_conversation: true
 
 forms:
   exemplo_forms:
@@ -226,68 +226,69 @@ forms:
       user_prontuario:
       - type: from_text
         intent: null
-      cenario_dois_menu:
-      - type: from_text
-        intent: null
-      user_nome_paciente:
-      - type: from_text
-        intent: null
-      user_nome_social:
-      - type: from_text
-        intent: null
-      user_telefone:
-      - type: from_text
-        intent: null
-      user_data_nasc:
-      - type: from_text
-        intent: null
-      user_sexo:
-      - type: from_text
-        intent: null
-      user_cpf:
-      - type: from_text
-        intent: null
-      user_nome_mae:
-      - type: from_text
-        intent: null
-      user_email:
-      - type: from_text
-        intent: null
-      user_end_cep:
-      - type: from_text
-        intent: null
-      user_end_rua:
-      - type: from_text
-        intent: null
-      user_end_numero:
-      - type: from_text
-        intent: null
-      user_end_complemento:
-      - type: from_text
-        intent: null
-      user_end_bairro:
-      - type: from_text
-        intent: null
-      user_end_cidade:
-      - type: from_text
-        intent: null
-      user_end_uf:
-      - type: from_text
-        intent: null
-      user_numero_sus:
-      - type: from_text
-        intent: null
-      user_certidao_nascimento:
-      - type: from_text
-        intent: null
-      user_certidao_casamento:
-      - type: from_text
-        intent: null
+#      cenario_dois_menu:
+#      - type: from_text
+#        intent: null
+#      user_nome_paciente:
+#      - type: from_text
+#        intent: null
+#      user_nome_social:
+#      - type: from_text
+#        intent: null
+#      user_telefone:
+#      - type: from_text
+#        intent: null
+#      user_data_nasc:
+#      - type: from_text
+#        intent: null
+#      user_sexo:
+#      - type: from_text
+#        intent: null
+#      user_cpf:
+#      - type: from_text
+#        intent: null
+#      user_nome_mae:
+#      - type: from_text
+#        intent: null
+#      user_email:
+#      - type: from_text
+#        intent: null
+#      user_end_cep:
+#      - type: from_text
+#        intent: null
+#      user_end_rua:
+#      - type: from_text
+#        intent: null
+#      user_end_numero:
+#      - type: from_text
+#        intent: null
+#      user_end_complemento:
+#      - type: from_text
+#        intent: null
+#      user_end_bairro:
+#      - type: from_text
+#        intent: null
+#      user_end_cidade:
+#      - type: from_text
+#        intent: null
+#      user_end_uf:
+#      - type: from_text
+#        intent: null
+#      user_numero_sus:
+#      - type: from_text
+#        intent: null
+#      user_certidao_nascimento:
+#      - type: from_text
+#        intent: null
+#      user_certidao_casamento:
+#      - type: from_text
+#        intent: null
 
 actions:
 - action_exemplo
 - validate_consulta_form
 - validate_cisam_form
+- action_submit
 
 responses:
   utter_ask_user_lgpd:
