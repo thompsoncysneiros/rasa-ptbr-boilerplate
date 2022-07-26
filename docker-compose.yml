@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
   # ================================= Bot =====================================
@@ -11,12 +11,13 @@ services:
     volumes:
       - ./bot/:/bot/
     ports:
-      - 5005:5005
       - 5006:5006
       - 5007:5007
     depends_on:
       - actions
-
+      - mysqldb
+    networks:
+      - rasa-net
   # ================================= Actions =================================
   # Rasa middleware used to connect with external APIs.
   actions:
@@ -29,6 +30,8 @@ services:
     volumes:
       - ./bot:/bot
     command: sh -c "python -m rasa_sdk -p 5055 --actions actions"
+    networks:
+      - rasa-net
 
   # ============================ Webchat Page  =================================
   # A container to run webchat html page
@@ -52,3 +55,27 @@ services:
       ports:
         - 5005:5005
       command: sh -c "make telegram"
+      networks:
+        - rasa-net
+
+  # ============================ Database =================================
+  # Specific Rasa bot integrated with Telegram.
+  mysqldb:
+      image: mysql
+      container_name: mysqldb
+      restart: always
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+      ports:
+        - 3306:3306
+        - 3307:3307
+      networks:
+        - rasa-net
+
+networks:
+  rasa-net:
+    driver: bridge
+
+
+
+
