@@ -97,8 +97,4 @@ stories:
   - intent: exemplo_acao
     entities:
       - acao
-  - action: action_exemplo
-- story: cadastro
-  steps:
-  - intent: cadastro
-  - action: utter_cadastro
+#  - action: action_exemplo

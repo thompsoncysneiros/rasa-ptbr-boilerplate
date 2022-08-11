@@ -1,7 +1,6 @@
 version: '2.0'
 
 intents:
-- consulta_form
 - cumprimentar:
     use_entities: true
 - relacionamento:
@@ -54,8 +53,6 @@ intents:
     use_entities: true
 - exemplo_forms:
     use_entities: true
-- cadastro:
-    use_entities: true
 - explica:
     use_entities: true
 - nlu_fallback:
@@ -86,23 +83,8 @@ entities:
 - storie
 - acao
 - forms
-- cadastro
 
 slots:
-  nome:
-    type: text
-    initial_value: null
-    auto_fill: false
-    influence_conversation: false
-  idade:
-    type: text
-    initial_value: null
-    auto_fill: false
-    influence_conversation: false
-  tipo_consulta:
-    type: text
-    initial_value: null
-    influence_conversation: true
   user_lgpd:
     type: text
     initial_value: null
@@ -197,21 +179,6 @@ slots:
 #    influence_conversation: true
 
 forms:
-  exemplo_forms:
-    required_slots:
-      idade:
-      - entity: idade
-        intent: informar
-        type: from_entity
-      nome:
-      - entity: nome
-        intent: informar
-        type: from_entity
-  consulta_form:
-    required_slots:
-      tipo_consulta:
-      - type: from_text
-        intent: null
   cisam_form:
     required_slots:
       user_lgpd:
@@ -285,17 +252,26 @@ forms:
 #        intent: null
 
 actions:
-- action_exemplo
-- validate_consulta_form
 - validate_cisam_form
 - action_submit
+- action_reset_all_slots
 
 responses:
-  utter_ask_user_lgpd:
+  utter_cumprimentar:
   - text: |
-      Antes de iniciarmos, preciso saber se você concorda em fornecer seus dados pessoais ao NUTES CISAM de acordo com a Lei Geral de Proteção de dados (LGPD)  
-      Se sim, digite 1.
-      Se não, digite 2.
+      Olá! Sou a Clau a atendente virtual do Cisam.
+      Será um prazer ajudá-la(o). Para prosseguir você deverá digitar as opções apresentadas na conversa.
+        
+      Caso deseje voltar para o diálogo anterior, digite: #.
+
+  utter_ask_user_lgpd:
+  - text: "Antes de começar, preciso saber se você concorda em fornecer seus dados pessoais ao NUTES CISAM de acordo com a Lei Geral de Proteção de dados (LGPD)"
+#    button_type: vertical
+    buttons:
+      - title: "Sim, concordo."
+        payload: '1'
+      - title: "Não concordo."
+        payload: '2'
 
   utter_user_lgpd_sim:
   - text: |
@@ -311,11 +287,10 @@ responses:
       Desculpe, informe o valor numérico 1 ou 2!
 
   utter_cenario_um_menu:
-  - text: |
-      Você já possui prontuário no Cisam?
-         
-      Se sim, digite 1.
-      Se não, digite 2.
+  - text:
+      "Você já possui prontuário no Cisam?  \n      
+      Se sim, digite 1.  \n
+      Se não, digite 2."
 
   utter_cenario_um_menu_resp_um:
   - text: |
@@ -341,45 +316,39 @@ responses:
 
   utter_user_prontuario:
   - text: |
-      Agora me informe o número do seu prontuario
+      Agora me informe o número do seu prontuário
 
   utter_user_prontuario_invalido:
   - text: |
       O prontuário digitado não é válido, vamos tentar novamente?
 
   utter_cenario_dois_menu:
-  - text: |
-      Perfeito, Srª {user_logado_nome}!
-      Agora, nos informe qual a opção que deseja.
-          
-      1: Saber mais sobre o que é NUTES.
-      2: Saber mais sobre a Teleconsulta.
-      3: Saber mais sobre o Planejamento Reprodutivo.
-      4: Agendar Teleconsulta para Planejamento Reprodutivo.
+  - text: "Perfeito, Srª {user_logado_nome}!  \n  
+      Agora, nos informe qual a opção que deseja.  \n  
+      1. Saber mais sobre o que é NUTES.  \n  
+      2. Saber mais sobre a Teleconsulta.  \n  
+      3. Saber mais sobre o Planejamento Reprodutivo.  \n 
+      4. Agendar Teleconsulta para Planejamento Reprodutivo."
 
   utter_cenario_dois_menu_resp_um:
-  - text: |
-      Caso deseje voltar para o diálogo anterior, digite: #.
-
-      1: O que é o NUTES? Acesse o link https://www.youtube.com/watch?v=-a4P2d7rP7s
+  - text:
+      "Caso deseje voltar para o diálogo anterior, digite: #.  \n
+      1. O que é o NUTES? Acesse o link https://www.youtube.com/watch?v=-a4P2d7rP7s"
 
   utter_cenario_dois_menu_resp_dois:
-  - text: |
-      Caso deseje voltar para o diálogo anterior, digite: #.
-
-      2: Informações sobre a Teleconsulta. (VIDEO)  
+  - text:
+      "Caso deseje voltar para o diálogo anterior, digite: #.  \n
+      2. Informações sobre a Teleconsulta. (VIDEO)"
 
   utter_cenario_dois_menu_resp_tres:
-  - text: |
-      Caso deseje voltar para o diálogo anterior, digite: #.
-
-      3: Planejamento Reprodutivo. (VÍDEO)  
+  - text:
+      "Caso deseje voltar para o diálogo anterior, digite: #.  \n
+      3. Planejamento Reprodutivo. (VÍDEO)"
 
   utter_cenario_dois_menu_resp_quatro:
-  - text: |
-      Caso deseje voltar para o diálogo anterior, digite: #.
-
-      4: Agendar Teleconsulta.
+  - text:
+      "Caso deseje voltar para o diálogo anterior, digite: #.  \n
+      4. Agendar Teleconsulta."
 
   utter_cenario_dois_menu_resp_errado:
   - text:
@@ -410,7 +379,7 @@ responses:
   utter_user_telefone:
   - text: |
       Ótimo! Agora me informe o número do seu telefone ou celular.
-      Por exemplo: 81-3182-7758
+      Exemplo: 81-3182-7758
 
   utter_user_telefone_invalido:
   - text: |
@@ -456,7 +425,7 @@ responses:
   utter_user_email:
   - text: |
       Certo. E qual o seu e-mail?
-      Por exemplo: telessaude.cisam@upe.br
+      Exemplo: telessaude.cisam@upe.br
 
   utter_user_email_invalido:
   - text: |
@@ -465,16 +434,16 @@ responses:
   utter_user_end_cep:
   - text: |
       Agora preciso que me informe o CEP.
-      Por exemplo: 51380-450
+      Exemplo: 51380-450
 
   utter_user_end_cep_invalido:
   - text: |
       CEP inválido, lembre-se que o o CEP é composto por 7 dígitos.
-      Por exemplo: 51380-450
+      Exemplo: 51380-450
 
   utter_user_end_rua:
   - text: |
-      Ok, entendi, agora preciso que me informe o nome da sua rua.
+      Ok, entendi, agora preciso que me informe o nome da rua onde você mora.
 
   utter_user_end_rua_invalido:
   - text: |
@@ -482,7 +451,7 @@ responses:
 
   utter_user_end_numero:
   - text: |
-      Entendi, agora preciso que vodê me informe o número da residência.
+      Entendi, agora preciso que você me informe o número da residência.
 
   utter_user_end_numero_invalido:
   - text: |
@@ -546,7 +515,7 @@ responses:
 
   utter_user_certidao_casamento:
   - text: |
-      Muito bom, agpra me diz qual o número da sua certidão de casamento.
+      Muito bom, agora me diz qual o número da sua certidão de casamento.
       (Caso não possua, digite não)
 
   utter_user_certidao_casamento_invalido:
@@ -554,53 +523,6 @@ responses:
       Não entendi, vamos tentar novamente? Digite a sua certidão de casamento.
       (Caso não possua, digite não)
 
-  utter_tipo_consulta_errado:
-  - text: |
-      Desculpe, informe um valor numérico entre 1 e 3!
-  
-  utter_voltar_resp_errada:
-  - text:
-      Digite "#" para voltar ou "sair" para encerrar.
-
-  utter_consulta_form:
-  - text: |
-      Ok, vou marcar uma consulta pra você! 
-
-  utter_ask_tipo_consulta:
-  - text: |
-      Qual consulta você quer? 
-
-       1: Genicologia 
-       2: Genicologia
-       3: Genicologia
-
-  utter_consulta_slots:
-  - text: |
-      A consulta que você quer é a de número {tipo_consulta}!
-
-  utter_cadastro:
-  - text: |
-      Ahh! Entendi, você quer se cadastrar! Abaixo seguem as informações para efetuar o seu cadastro.
-      Acesse o link para solicitar a Tele Consulta: https://bit.ly/TeleConsultraCisam
-  utter_fallback:
-  - text: |
-      Desculpe, ainda não sei falar sobre isso ou talvez não consegui entender direito
-      Você pode perguntar de novo de outro jeito?
-  - text: |
-      Hummmm... Não sei se entendi. Pode escrever de outra forma?
-  - text: |
-      Acho que não te entendi, você pode me perguntar de novo usando outras palavras?
-  - text: |
-      Vamos tentar mais uma vez? Eu não consegui te entender direito, me pergunta de outro jeito?
-  utter_elogios:
-  - text: |
-      Obrigada! É sempre bom dar e receber elogios :P
-  utter_cumprimentar:
-  - text: |
-      Olá! Sou a Clau a atendente virtual do Cisam.
-      Será um prazer ajudá-la(o). Para prosseguir você deverá digitar as opções apresentadas na conversa.
-      
-      Caso deseje voltar para o diáglogo anterior, digite: #.
   utter_despedir:
   - text: |
       Foi um prazer conversar com você!
@@ -614,6 +536,24 @@ responses:
       Foi um prazer te ajudar!
       Quando surgir alguma dúvida, volte aqui!
       O CISAM agradece o seu contato! Até mais!
+
+  utter_voltar_resp_errada:
+  - text:
+      Digite "#" para voltar ou "sair" para encerrar.
+
+  utter_fallback:
+  - text: |
+      Desculpe, ainda não sei falar sobre isso ou talvez não consegui entender direito
+      Você pode perguntar de novo de outro jeito?
+  - text: |
+      Hummmm... Não sei se entendi. Pode escrever de outra forma?
+  - text: |
+      Acho que não te entendi, você pode me perguntar de novo usando outras palavras?
+  - text: |
+      Vamos tentar mais uma vez? Eu não consegui te entender direito, me pergunta de outro jeito?
+  utter_elogios:
+  - text: |
+      Obrigada! É sempre bom dar e receber elogios :P
   utter_tudo_bem:
   - text: |
       Tudo bem, obrigada! Em que posso te ajudar?
