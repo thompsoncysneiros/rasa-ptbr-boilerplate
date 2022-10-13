@@ -265,7 +265,7 @@ responses:
       Caso deseje voltar para o diálogo anterior, digite: #.
 
   utter_ask_user_lgpd:
-  - text: "Antes de começar, preciso saber se você concorda em fornecer seus dados pessoais ao NUTES CISAM de acordo com a Lei Geral de Proteção de dados (LGPD)"
+  - text: "Antes de começar, preciso saber se você concorda em fornecer seus dados pessoais ao NUTES CISAM de acordo com a Lei Geral de Proteção de Dados (LGPD)"
 #    button_type: vertical
     buttons:
       - title: "Sim, concordo."
